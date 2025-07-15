@@ -5,7 +5,7 @@ vector<int> leftIndices(vector<int> &heights)
 {
     int n = heights.size();
     vector<int> ans(n);
-    stack<pair<int,int>> st;
+    stack<int> st;
     for (int i = 0; i < n; i++)
     {
 
@@ -14,15 +14,15 @@ vector<int> leftIndices(vector<int> &heights)
             ans[i] = -1;
         }
 
-        else if (st.size() > 0 && st.top().first < heights[i])
+        else if (st.size() > 0 && st.top() < heights[i])
         {
-            ans[i] = st.top().second;
+            ans[i] = st.top();
         }
 
-        else if (st.size() > 0 && st.top().first >= heights[i])
+        else if (st.size() > 0 && st.top() >= heights[i])
         {
 
-            while (st.size() > 0 && st.top().first >= heights[i])
+            while (st.size() > 0 && st.top() >= heights[i])
             {
                 st.pop();
             }
@@ -31,10 +31,10 @@ vector<int> leftIndices(vector<int> &heights)
                 ans[i] = -1;
 
             else
-                ans[i] = st.top().second;
+                ans[i] = st.top();
         }
 
-        st.push({heights[i],i});
+        st.push(heights[i]);
     }
 
     return ans;
